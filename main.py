@@ -24,6 +24,9 @@ app = Flask(__name__)
 ##route代表只要進入根目錄就使用Flask與main.py檔案
 def index():
     return '<h1 style="color:red">您好! Flaks!</h1>'
+@app.route("/name")
+def name():
+    return '<h1>name頁面</h1>'
 ##return 服務器能編譯的內容，html
 if __name__ == "__main__":
     app.run(debug=True)
