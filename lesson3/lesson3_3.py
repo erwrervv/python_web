@@ -1,14 +1,11 @@
 import requests
 
-# GET
-response = requests.get("https://jsonplaceholder.typicode.com/todos/1")
-print(response.json())
+url = 'https://data.ntpc.gov.tw/api/datasets/010e5b15-3823-4b20-b401-b1cf000550c5/json?page=0&size=1000'
 
-# POST
-payload = {'name':'Kevin', 'age':30}
-response = requests.post("https://httpbin.org/post", json=payload)
-print(response.json())
+response = requests.get(url)
+#print(type(response))
 
-# PUT
-response = requests.put("https://httpbin.org/put", json={'update':'data'})
-print(response.json())
+if response.status_code == 200:
+    print("下載成功")
+else:
+    print("下載失敗")
