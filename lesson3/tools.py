@@ -22,3 +22,8 @@ def download_youbike_data()->list:
         raise Exception(f"發生未預期的請求錯誤: {err}")
     else:
         return data
+def get_area(data)->list:
+    areas = set()
+    for item in data:
+        areas.add(item['sarea'])
+    return list(areas)
