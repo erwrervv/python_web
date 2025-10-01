@@ -2,8 +2,8 @@
 
 ## 工作目錄
 
-- **2025_0915_tvdi**/lesson4_ai
+- **PYTHON_WEB**\lesson4_2
 
 ## 使用 uv 進入虛擬環境
 
-- source .venv/bin/activate
+- .venv\Scripts\activate
