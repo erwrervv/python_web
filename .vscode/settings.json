@@ -1,3 +1,3 @@
 {
-    "copilot.chat.instructions": "這是一個 Flask的專案學習範例使用的是uv的虛擬環境,請在終端機中輸入'.venv\\Scripts\\activate' ,每個資料夾內都會有一個Flask的專案",
+    "copilot.chat.instructions": "這是一個 Flask 專案的學習範例，使用 uv 建立的虛擬環境。請在終端機輸入 '.venv\\Scripts\\activate' 以啟動虛擬環境。每個資料夾內都包含一個獨立的 Flask 專案。"
 }
