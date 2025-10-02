@@ -109,7 +109,6 @@ padding: 0;
             padding: 1rem;
             margin-top: 2rem;
         }
-
 /* 響應式設計 */
 @media (max-width: 768px) {
     .row {
@@ -162,21 +161,21 @@ padding: 0;
 }
 
 /* 手機專用：在小螢幕時強制為白色圖示（覆寫桌機深色） */
-@media (max-width: 800px) {
+
     .nav-toggle .hamburger-icon {
         color: #ffffff !important;
         /* 手機版白色 */
         padding: 0.25rem 0.5rem;
     }
-}
-
-/* 隱藏舊的 bar 結構（若先前版本仍存在） */
-.nav-toggle .hamburger,
-.nav-toggle .hamburger .bar {
-    display: none;
-}
+    
+    /* 隱藏舊的 bar 結構（若先前版本仍存在） */
+    .nav-toggle .hamburger,.hamburger-icon,
+    .nav-toggle .hamburger .bar {
+        display: none;
+    }
 
 /* 使用字型圖示（Unicode）作為漢堡按鈕 */
+@media (max-width: 800px){
 .nav-toggle .hamburger-icon {
     display: inline-block;
     font-size: 1.4rem;
@@ -185,9 +184,12 @@ padding: 0;
     /* 強制白色 */
     user-select: none;
 }
-
+        .nav-toggle .hamburger,.hamburger-icon,
+        .nav-toggle .hamburger .bar {
+            display: inline-block;
+        }
 /* 在手機顯示切換按鈕並確保顏色為白（以高優先度避免被其他規則覆蓋） */
-@media (max-width: 800px) {
+
     .nav-toggle {
         display: inline-flex;
         align-items: center;
@@ -205,7 +207,7 @@ padding: 0;
     .nav-toggle.open .hamburger-icon {
         color: #ffffff !important;
     }
-}
+
 
 /* ...existing code... */
 .navbar .nav-list {
@@ -243,4 +245,5 @@ padding: 0;
 
 .nav-toggle.open .hamburger .bar:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
+}
 }

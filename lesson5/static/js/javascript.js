@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
 	const toggle = document.querySelector('.nav-toggle');
 	const navList = document.getElementById('primary-navigation');
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// 在視窗尺寸改變到桌機時，自動關閉手機選單以避免遺留狀態
 	window.addEventListener('resize', function () {
-		if (window.innerWidth > 800) {
+		if (window.innerWidth <= 800) {
 			if (navList.classList.contains('open')) {
 				navList.classList.remove('open');
 			}
