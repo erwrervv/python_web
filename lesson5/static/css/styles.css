@@ -22,11 +22,20 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 15px;
-                        display: flex;
-                            justify-content: space-between;
-                            /* align-items: center; */
         }
-
+        .navbar{
+box-sizing: border-box;
+padding: 0;
+        }
+        .navbar>.container a{
+        }
+        .navbar > .container{
+            margin: 0;
+            display: flex;
+                justify-content: space-between;
+                align-items: center;
+            
+}
         .navbar-brand {
             color: white;
             text-decoration: none;
@@ -39,15 +48,32 @@
             display: flex;
             gap: 20px;
         }
-
-        .nav-item a {
+.container a{
+    text-align: center;
+    width: 200px;
+    height: 80px;
+    line-height: 80px;
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+}
+.nav-list>.nav-item>a{
+    width: 100px;
+}
+.container a:hover{
+            color: #ddd;
+                background-color: rgba(0, 134, 243, 0.5);
+}
+        /* .nav-item a {
+            padding: 20px;
             color: white;
             text-decoration: none;
-        }
+        } */
 
-        .nav-item a:hover {
+        /* .nav-item a:hover {
             color: #ddd;
-        }
+            background-color: rgba(0, 134, 243, 0.5);
+        } */
 
         /* 主要內容區樣式 */
         main {
@@ -83,7 +109,7 @@
 
         /* 頁尾樣式 */
         footer {
-            background-color: #0646d1;
+            background-color: #0a3797;
             color: white;
             text-align: center;
             padding: 1rem;
