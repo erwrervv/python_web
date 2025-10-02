@@ -148,16 +148,31 @@ padding: 0;
     z-index: 60;
 }
 
-/* 漢堡字型圖示：桌機預設使用深色（可在變數中調整） */
+/* SVG 漢堡圖示樣式 */
 .nav-toggle .hamburger-icon {
-    display: inline-block;
-    font-size: 1.4rem;
-    line-height: 1;
-    color: var(--brand-text, #0f1720);
-    /* 桌機為深色，避免在淺底看不見 */
-    user-select: none;
-    padding: 0.1rem 0.3rem;
-    border-radius: 6px;
+    width: 24px;  /* 預設大小 */
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* SVG 線條樣式 */
+.nav-toggle .hamburger-icon .line {
+    fill: #ffffff;  /* 預設白色 */
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* 漢堡選單展開時的動畫效果 */
+.nav-toggle.open .hamburger-icon .line-1 {
+    transform: translateY(20px) rotate(45deg);
+}
+
+.nav-toggle.open .hamburger-icon .line-2 {
+    opacity: 0;
+}
+
+.nav-toggle.open .hamburger-icon .line-3 {
+    transform: translateY(-20px) rotate(-45deg);
 }
 
 /* 手機專用：在小螢幕時強制為白色圖示（覆寫桌機深色） */
@@ -176,13 +191,31 @@ padding: 0;
 
 /* 使用字型圖示（Unicode）作為漢堡按鈕 */
 @media (max-width: 800px){
-.nav-toggle .hamburger-icon {
-    display: inline-block;
-    font-size: 1.4rem;
-    line-height: 1;
-    color: #ffffff !important;
-    /* 強制白色 */
-    user-select: none;
+    .nav-toggle .hamburger-icon {
+        width: 32px;  /* 手機版放大 */
+        height: 32px;
+    }
+    
+    /* 增加點擊區域 */
+    .nav-toggle {
+        padding: 0.5rem;
+        margin: 0.5rem;
+    }
+    
+    /* 確保白色（即使在深色背景） */
+    .nav-toggle .hamburger-icon .line {
+        fill: #ffffff;
+    }
+    
+    /* 滑鼠懸停效果 */
+    .nav-toggle:hover .hamburger-icon {
+        transform: scale(1.1);
+    }
+    
+    /* 按下效果 */
+    .nav-toggle:active .hamburger-icon {
+        transform: scale(0.95);
+    }
 }
         .nav-toggle .hamburger,.hamburger-icon,
         .nav-toggle .hamburger .bar {
@@ -245,5 +278,4 @@ padding: 0;
 
 .nav-toggle.open .hamburger .bar:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
-}
 }
