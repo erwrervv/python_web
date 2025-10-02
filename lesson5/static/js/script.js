@@ -1,9 +1,7 @@
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.querySelector('.nav-toggle');
-    const navList = document.getElementById('primary-navigation');
-
-    if (!toggle || !navList) return;
+    const navList = document.getElementById('primary-navigation');    if (!toggle || !navList) return;
 
     function closeMenu() {
         navList.classList.remove('show');

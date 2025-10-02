@@ -11,11 +11,11 @@
             line-height: 1.6;
         }
 
-        /* 導覽列樣式 */
+        /* 導覽列基本樣式 */
         .navbar {
             background-color: #0a3797;
-            padding: 1rem;
-
+            padding: 0;
+            box-sizing: border-box;
         }
 
         .container {
@@ -23,19 +23,16 @@
             margin: 0 auto;
             padding: 0 15px;
         }
-        .navbar{
-box-sizing: border-box;
-padding: 0;
-        }
 
-        .navbar > .container{
+        .navbar > .container {
             margin: 0;
             display: flex;
-                justify-content: space-between;
-                align-items: center;
-                height: 80px;
-            
-}
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            position: relative;
+        }
+
         .navbar-brand {
             color: white;
             text-decoration: none;
@@ -43,10 +40,48 @@ padding: 0;
             font-weight: bold;
         }
 
+        /* 桌面版導覽列預設樣式 */
         .nav-list {
             list-style: none;
             display: flex;
             gap: 20px;
+            align-items: center;
+        }
+
+        /* 漢堡選單按鈕預設隱藏 */
+        .nav-toggle {
+            display: none; /* 桌面版隱藏漢堡按鈕 */
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        /* 手機版樣式（800px以下） */
+        @media (max-width: 800px) {
+            .nav-toggle {
+                display: flex; /* 顯示漢堡按鈕 */
+                align-items: center;
+                justify-content: center;
+            }
+
+            .nav-list {
+                display: none; /* 預設隱藏選單 */
+                position: absolute;
+                top: 100%; /* 位於導覽列下方 */
+                left: 0;
+                width: 100%;
+                background-color: #0a3797;
+                padding: 1rem;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-list.show {
+                display: flex; /* .show class 時顯示選單 */
+            }
         }
 .container a{
     border-radius: 0.175rem;
@@ -267,15 +302,38 @@ padding: 0;
     padding: 0.75rem 0.5rem;
 }
 
-/* 漢堡按鈕開啟時可做簡單動畫（切換成 X） */
-.nav-toggle.open .hamburger .bar:nth-child(1) {
-    transform: translateY(6px) rotate(45deg);
+/* SVG 漢堡圖示樣式與動畫 */
+.hamburger-icon {
+    width: 32px;
+    height: 32px;
 }
 
-.nav-toggle.open .hamburger .bar:nth-child(2) {
+.hamburger-icon .line {
+    fill: white;
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out;
+    transform-origin: center;
+}
+
+/* 選單開啟時的動畫效果 */
+.nav-toggle[aria-expanded="true"] .line.line-1 {
+    transform: translateY(20px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .line.line-2 {
     opacity: 0;
 }
 
-.nav-toggle.open .hamburger .bar:nth-child(3) {
-    transform: translateY(-6px) rotate(-45deg);
+.nav-toggle[aria-expanded="true"] .line.line-3 {
+    transform: translateY(-20px) rotate(-45deg);
+}
+
+/* 互動效果 */
+@media (max-width: 800px) {
+    .nav-toggle:hover .hamburger-icon {
+        transform: scale(1.1);
+    }
+    
+    .nav-toggle:active .hamburger-icon {
+        transform: scale(0.95);
+    }
 }
