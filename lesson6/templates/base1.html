@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    {% block head %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>{% block title%}{% endblock%}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    {% endblock %}
+  </head>
+  <body>
+    <header>
+        {% block header %}xxxxx {% endblock %}
+      <h1>我的網站</h1>
+    </header>
+    <div class="content">{% block content %} xxxx {% endblock %}
+        
+    </div>
+
+    <div>
+      <ul>
+        {% for user in user_list %}
+        <li>{{ user["name"] }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 我的程式課程</p>
+    </footer>
+    {% block js %}
+    <script src="{{ url_for('static', filename='js/lesson6_1.js') }}"></script>
+    {% endblock %}
+  </body>
+</html>
