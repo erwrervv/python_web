@@ -1,38 +1,32 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-  <head>
+<head>
     {% block head %}
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <title>{% block title%}{% endblock%}</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/index.css') }}"
-    />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# 這裏放的是註解 #}
+    <title>{% block title%}{% endblock%}</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/lesson6_1.css') }}"/>
     {% endblock %}
-  </head>
-  <body>
-    <header>
-        {% block header %}xxxxx {% endblock %}
-      <h1>我的網站</h1>
-    </header>
-    <div class="content">{% block content %} xxxx {% endblock %}
-        
-    </div>
+</head>
+<body>
 
-    <div>
-      <ul>
-        {% for user in user_list %}
-        <li>{{ user["name"] }}</li>
-        {% endfor %}
-      </ul>
+    <header>
+        {% block header %}
+        xxxxxxxx
+        {% endblock %}
+    </header>
+
+    <div class="content">
+        {% block content%}
+        
+        {% endblock %}
     </div>
 
     <footer>
-      <p>&copy; 2025 我的程式課程</p>
+        <p>&copy; 2025 我的程式課程</p>
     </footer>
     {% block js %}
-    <script src="{{ url_for('static', filename='js/lesson6_1.js') }}"></script>
     {% endblock %}
-  </body>
+</body>
 </html>

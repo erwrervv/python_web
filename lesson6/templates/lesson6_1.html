@@ -4,8 +4,6 @@
 {{ title }}
 {% endblock %}
 
-
-
 {% block header %}
 <h1>我的網站</h1>
 {% endblock %}
@@ -19,16 +17,12 @@
 
 {% endblock %}
 
-{% block title%}
-{{ title }}
-{% endblock %}
 
 {% block js %}
 <script src="{{ url_for('static',filename='js/lesson6_1.js') }}"></script>
 {% endblock %}
 
-
-{% block header %}
+{% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/lesson6_1.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='css/lesson6_2.css')}}"/>
 {% endblock %}
