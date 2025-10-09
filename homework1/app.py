@@ -23,6 +23,10 @@ def lesson6_1():
         {"name": "小英", "is_vip": True}
     ]
     return  render_template("lesson6_1.html",title=page_tile, user_list = users)
+@app.route("/decision_tree")
+def decision_tree():
+    return render_template("decision_tree.html")
+
 
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""
