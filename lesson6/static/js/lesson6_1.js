@@ -1,2 +1,1 @@
-console.log("js載入了")
-
+console.log("嗨，我的 JavaScript 檔案被成功載入了！","我的名字叫Robert!")

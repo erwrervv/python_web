@@ -18,7 +18,7 @@
 
 本專案使用 `uv` 進行虛擬環境與套件管理。
 
-1.  **安裝依賴**: `uv pip install -r requirements.txt`
+1.  **安裝依賴**: `uv add 套件名稱`
 2.  **執行專案**: `uv run python ./lesson5/app.py`
 
 ### 開發規範
