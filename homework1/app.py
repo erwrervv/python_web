@@ -5,7 +5,9 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return render_template("index.html")
-
+@app.route("/machine")
+def machine():
+    return render_template("machine.html")
 @app.route("/regression")
 def regression():
     return render_template("regression.html")

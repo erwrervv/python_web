@@ -16,16 +16,20 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+    
 }
 
 /* 導覽列 */
 .navbar {
+    width: 100%;
     background-color: #0B346E;
     padding: 0.5rem 1rem;
     position: sticky;
     top: 0;
     z-index: 1000;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color:white;
+
 }
 
 .navbar .container {
