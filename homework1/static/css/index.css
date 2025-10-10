@@ -4,6 +4,19 @@
     padding: 0;
     box-sizing: border-box;
 }
+/*漸層背景*/
+.bgc-liner{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+}
+.col-sidebar>.card{
+        margin-top: 40px;
+}
 
 /* 基本樣式 */
 body {

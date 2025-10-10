@@ -27,7 +27,15 @@ def lesson6_1():
     return  render_template("lesson6_1.html",title=page_tile, user_list = users)
 @app.route("/decision_tree")
 def decision_tree():
-    return render_template("decision_tree.html")
+    # 建立字典變數
+    tree_info = {
+        "algorithm": "決策樹分類器",
+        "applications": ["垃圾郵件分類", "客戶流失預測", "疾病診斷"],
+        "pros": ["容易理解", "不需要特徵縮放", "可視化清晰"]
+    }
+
+    # 將字典傳到模板
+    return render_template("decision_tree.html", tree_info=tree_info)
 
 
 def main():
