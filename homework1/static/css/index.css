@@ -14,10 +14,13 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 40px;
 }
+.supervised {
+    background: linear-gradient(135deg, #b0bcf3 0%, #c300ff 100%);
+}
+
 .col-sidebar>.card{
         margin-top: 40px;
 }
-
 /* 基本樣式 */
 body {
     font-family: Arial, sans-serif;
