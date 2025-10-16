@@ -143,32 +143,70 @@ main {
 }
 
 /* Pros and Cons */
+
 .pros-cons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.pros,
+.cons {
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.pros {
+    background-color: #e8f5e9;
+    border-left: 4px solid #4caf50;
+}
+
+.cons {
+    background-color: #ffebee;
+    border-left: 4px solid #f44336;
+}
+
+.pros strong,
+.cons strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.pros ul,
+.cons ul {
+    padding-left: 1.5rem;
+    list-style-type: disc;
+}
+/*Action button*/
+.action-button{
+text-align: center;
+margin-top: 2rem;
+padding-top: 1.5rem;
+border-top: 2px dashed #ddd;
+
+
+}
+.btn-primary {
+display: inline-block;
+background: linear-gradient(135deg ,#0B346E 0%,#3489ff 100%)       ;
+color: white;
+padding: 0.8rem 2rem;
+border-radius: 25px;
+text-decoration: none;
+font-weight: bold;
+font-size: 1.1rem;
+transition: all 0.3s ease;
+
+
+
+}
+.btn-primary :hover{
+    scale: 1.2;
+}
     
-    gap: 2rem;
 
-}
-
-.pros{
-    border-radius: 1em;
-            padding: 10px;
-border-left:4px solid #1af588;
-background-color: #1af5884b;
-} 
-.cons{
-        border-radius: 1em;
-        padding: 10px;
-border-left: 4px solid #bd1600;
-background-color: #bd160056;
-}
-
-.pros ul , .cons ul {
-padding-left: 1.5rem;
-}
-
-/* 響應式設計 - 平板 */
 @media (max-width:768px) {
 
     /* Hero Section */
@@ -186,12 +224,13 @@ padding-left: 1.5rem;
         align-items: flex-start;
         gap: 0.5rem;
     }
-.pros-cons {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
+
+    .pros-cons {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
 
 }
-
 /* 響應式設計 - 手機 */
 @media (max-width: 800px) {}
