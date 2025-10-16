@@ -202,11 +202,49 @@ transition: all 0.3s ease;
 
 
 }
-.btn-primary :hover{
-    scale: 1.2;
+.btn-primary:hover{
+    transform: scale(1.2);
 }
     
+/* Info Section */
+.info-section {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
 
+.info-section h2 {
+    font-size: 1.8rem;
+    color: #0B346E;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05)
+}
+
+.feature-item h4 {
+    color: #667eea;
+    margin-bottom: 0.8rem;
+    font-size: 1.2 rem;
+}
+
+.feature-item p {
+    color: #666;
+    line-height: 1.6;
+}
 @media (max-width:768px) {
 
     /* Hero Section */
@@ -229,7 +267,10 @@ transition: all 0.3s ease;
         grid-template-columns: 1fr;
         gap: 1rem;
     }
-
+        .features {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
 
 }
 /* 響應式設計 - 手機 */
