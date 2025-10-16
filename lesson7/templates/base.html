@@ -16,7 +16,7 @@
             <a class="navbar-brand" href="{{ url_for('index') }}">職能發展學院</a>
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="{{ url_for('machine') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>機器學習</a>
+                    <a href="{{ url_for('machine') }}" {% if request.endpoint == 'machine' %}class="active"{% endif %}>機器學習</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{url_for('regression')}}" {% if request.endpoint == 'regression' %}class="active"{% endif %}>線性迴歸</a>
