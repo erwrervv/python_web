@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Python機器學習課程{% endblock %}</title>
     {# 使用 Flask 靜態資源 url_for 連結到 /static/css/styles.css #}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}?v=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}?v=1">
     <!-- 已移除內嵌 <style>，相關導覽列樣式已移至 static/css/index.css -->
 </head>
 <body>
@@ -48,6 +48,6 @@
     </footer>
 
     <!-- 載入手機版導覽的行為腳本 -->
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/base.js') }}"></script>
 </body>
 </html>
