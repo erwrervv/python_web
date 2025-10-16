@@ -17,6 +17,9 @@ def knn():
 def machine():
     return render_template("machine.html")
 
+@app.route("/test")
+def test():
+    return render_template("test.html")
 
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""
