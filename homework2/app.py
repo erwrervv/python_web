@@ -15,6 +15,9 @@ def regression():
 @app.route("/knn")
 def knn():
     return render_template("knn.html")
+@app.route("/test")
+def test():
+    return render_template("test.html")
 
 @app.route("/lesson6_1")
 def lesson6_1():

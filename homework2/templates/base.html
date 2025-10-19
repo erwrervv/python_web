@@ -44,6 +44,9 @@
                 <a href="{{ url_for('decision_tree') }}" {% if request.endpoint=='decision_tree' %}class="active" {%
                     endif %}>決策樹分類</a>
             </li>
+                        <li class="nav-item">
+                <a href="{{ url_for('test') }}" {% if request.endpoint=='test' %}class="active" {% endif %}>test</a>
+            </li>
         </ul>
         <!-- 手機版導覽切換按鈕 -->
         <button class="nav-toggle" aria-label="顯示導覽選單">
