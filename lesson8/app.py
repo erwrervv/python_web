@@ -26,6 +26,7 @@ def regression_data():
         "success": True,
         "error":"沒有錯誤"
     })
+# 新增一個 API 路由，回傳 JSON 格式的資料
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""
     # 在開發環境下使用 debug=True，部署時請關閉
