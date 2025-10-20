@@ -16,10 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (navList.classList.contains('open')) {
 				navList.classList.remove('open');
 			}
+			/*
 			if (toggle.classList.contains('open')) {
 				toggle.classList.remove('open');
 				toggle.setAttribute('aria-expanded', 'false');
 			}
+			*/
 		}
 	});
 });
