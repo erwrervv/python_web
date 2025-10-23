@@ -118,7 +118,10 @@
         <p class="help-text">將滑鼠移到資料點上可以看到詳細資訊</p>
     </div>
 </div>
-  {% endblock %} {% block javascript %}
+{% block footer %} {{ super() }}{% endblock %} 
+  {% endblock %} 
+  {% block javascript %}
   <script src="{{ url_for('static', filename='js/regression.js') }}"></script>
+      <script src="{{url_for('static',filename='vendor/chart.js/chart.umd.js')}}"></script>
   {% endblock %}
 </div>
