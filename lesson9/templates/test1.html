@@ -23,7 +23,7 @@
         async function getMyData(){
             console.log("1. 函式開始執行，準備 'try'...");
             try{
-                let data = await mockFetch(false)
+                let data = await mockFetch(true)
                 // 只有在 await 成功後，才會執行到這行
                 console.log("3. (2秒後) 成功了！資料是：", data);
             }catch (error){
