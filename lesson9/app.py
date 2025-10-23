@@ -1,4 +1,5 @@
-from flask import Flask,render_template,jsonify
+from flask import Flask,render_template,jsonify,Response
+import json
 from sklearn.datasets import fetch_california_housing
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -6,9 +7,10 @@ from sklearn.metrics import r2_score, mean_squared_error
 import numpy as np
 app = Flask(__name__)
 # 讓app輸出json時,繁體中文不會出現亂碼
+# 必須放在 jsonify 之前設定
 app.config['JSON_AS_ASCII'] = False
 # 讓app輸出json時,繁體中文不會出現亂碼,支援新的flask版本
-app.config['JSON_UTF8'] = True
+app.config['JSON_SORT_KEYS'] = False  # 可選，防止自動排序 key
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -105,14 +107,11 @@ def regression_data():
                 "info": "此資料集取自 1990 年加州人口普查資料"
             }
         }
-        return jsonify(response)
+        # 正確輸出中文 JSON
+        return Response(json.dumps(response, ensure_ascii=False), content_type="application/json; charset=utf-8")
+
     except Exception as e:
-        return jsonify(
-            {
-                "success": False,
-                "error": str(e)
-            }
-        ), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""
     # 在開發環境下使用 debug=True，部署時請關閉

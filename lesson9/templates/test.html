@@ -3,7 +3,7 @@
   <head>
     <title>範例1</title>
     <style>
-      card {
+      /* card {
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -11,12 +11,15 @@
       card > h1 {
       }
       card > button {
-      }
+      } */
       ng-content > h2,
       ng-content > p {
         margin-bottom: 20px;
       }
+
+      
     </style>
+
   </head>
   <body>
     <!-- <card>
@@ -37,50 +40,81 @@
         <button id="myButton">點我改變標題</button>
       </div>
     </mat-card>
-
-    <script>
-      // let title = document.getElementById("title");
-      // let button = document.getElementById("myButton");
-      // let card_box = document.getElementById("card_box");
-      // button.addEventListener("click", function () {
-      //   title.style.fontSize = "36px";
-      //   title.innerHTML = "";
-      // });
-
-      // 取得容器
-      const card_box = document.querySelector(".card_box");
-
-      // 產生整個含 button 的內容
-      card_box.innerHTML = `
-    <div class="card">
-      <img src="{{ url_for('static', filename='img/decision_tree_ex1.png') }}" alt="">
-      <h2>圖片的文字</h2>
-      <p>圖片的文字內容</p>
-      <button class="show-more-btn">顯示更多</button>
+    <div>
+        <canvas id="myChart"></canvas>
     </div>
-  `;
 
-      // 找出新加入的按鈕
-      const button = document.querySelector(".show-more-btn");
+    <script src="{{url_for('static',filename='vendor/chart.js/chart.umd.js')}}"></script>
+    <script>
+/* 自己測試 */
+//     // let title = document.getElementById("title");
+  //     // let button = document.getElementById("myButton");
+  //     // let card_box = document.getElementById("card_box");
+  //     // button.addEventListener("click", function () {
+  //     //   title.style.fontSize = "36px";
+  //     //   title.innerHTML = "";
+  //     // });
 
-      // 加上監聽事件
-      button.addEventListener("click", function () {
-        card_box.innerHTML = `
-      <div class="card">
-        <img src="{{ url_for('static', filename='img/decision_tree_ex2.png') }}" alt="">
-        <h2>新圖片的標題</h2>
-        <p>這是點擊後換成的內容</p>
-        <button class="show-more-btn">返回</button>
-      </div>
-    `;
+  //     // 取得容器
+  //     const card_box = document.querySelector(".card_box");
 
-        // ⚠️ 重新抓取新生成的按鈕（因為上一個按鈕被取代掉了）
-        const newButton = document.querySelector(".show-more-btn");
-        newButton.addEventListener("click", function () {
-          location.reload(); // 或換回前一個內容
-        });
+  //     // 產生整個含 button 的內容
+  //     card_box.innerHTML = `
+  //   <div class="card">
+  //     <img src="{{ url_for('static', filename='img/decision_tree_ex1.png') }}" alt="">
+  //     <h2>圖片的文字</h2>
+  //     <p>圖片的文字內容</p>
+  //     <button class="show-more-btn">顯示更多</button>
+  //   </div>
+  // `;
+
+  //     // 找出新加入的按鈕
+  //     const button = document.querySelector(".show-more-btn");
+
+  //     // 加上監聽事件
+  //     button.addEventListener("click", function () {
+  //       card_box.innerHTML = `
+  //     <div class="card">
+  //       <img src="{{ url_for('static', filename='img/decision_tree_ex2.png') }}" alt="">
+  //       <h2>新圖片的標題</h2>
+  //       <p>這是點擊後換成的內容</p>
+  //       <button class="show-more-btn">返回</button>
+  //     </div>
+  //   `;
+
+  //       // ⚠️ 重新抓取新生成的按鈕（因為上一個按鈕被取代掉了）
+  //       const newButton = document.querySelector(".show-more-btn");
+  //       newButton.addEventListener("click", function () {
+  //         location.reload(); // 或換回前一個內容
+  //       });
+  //     });
+  //     console.error("錯誤測試");
+  /* 自己測試 */
+  /* 課程測試 */
+      const ctx = document.getElementById('myChart');
+      
+      new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [12, 19, 3, 5, 2, 3],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
       });
-      console.error("錯誤測試");
+      /* 課程測試 */
     </script>
+    
+
+
   </body>
 </html>
