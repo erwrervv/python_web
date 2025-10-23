@@ -29,6 +29,9 @@ def machine():
 @app.route("/test")
 def test():
     return render_template("test.html")
+@app.route("/test1")
+def test1():
+    return render_template("test1.html")
 @app.route("/api/regression/data")
 def regression_data():
     try:  
