@@ -4,7 +4,8 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/regression.css') }}"
 />
-{% endblock %} {% block content %}
+{% endblock %} 
+{% block content %}
 <div class="regression-container">
     <div class="page-header">
         <h1>線性迴歸 (Linear Regression)</h1>
@@ -117,11 +118,41 @@
         </ul>
         <p class="help-text">將滑鼠移到資料點上可以看到詳細資訊</p>
     </div>
-</div>
-{% block footer %} {{ super() }}{% endblock %} 
-  {% endblock %} 
+    <div>
+<canvas id="myChart" width="800" height="500" style="display: block; box-sizing: border-box; width: 800px; height: 500px;"></canvas>
+    </div>
+</div>  {% endblock %} 
+
+
   {% block javascript %}
   <script src="{{ url_for('static', filename='js/regression.js') }}"></script>
-      <script src="{{url_for('static',filename='vendor/chart.js/chart.umd.js')}}"></script>
+      <script src="{{url_for('static',filename='vendor/chart.js/chart.umd.js')}}">        
+      </script>
+      <script>      
+      /* 課程測試 */
+      const ctx = document.getElementById("myChart");
+        
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          datasets: [
+            {
+              label: "# of Votes",
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+      /* 課程測試 */
+      </script>
   {% endblock %}
 </div>

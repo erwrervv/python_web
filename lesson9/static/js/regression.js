@@ -1,2 +1,2 @@
 debugger;
-console("Hello! regression.js")
+console.log("Hello! regression.js")
