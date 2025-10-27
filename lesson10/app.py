@@ -115,6 +115,18 @@ def regression_data():
 
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
+    
+@app.route("/api/regression/predict")
+def regression_predict():
+    """線性迴歸預測 API - 根據房間數預測房價"""
+    response = {
+        "success": True,
+        "prediction":{
+            "price": 100,
+            "unit": "萬美元"
+        }
+    }
+    return jsonify(response)
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""
     # 在開發環境下使用 debug=True，部署時請關閉
