@@ -3,13 +3,23 @@ let modelData = null; //儲存模型資料
 
 // 頁面戴入完成後才執行
 document.addEventListener("DOMContentLoaded", function () {
-    loadRegressionData();
-    
+  loadRegressionData();
+
   //綁定事件預測按鈕
-document.getElementById("predict-btn").addEventListener("click", function () {
+  document.getElementById("predict-btn").addEventListener("click", function () {
     const rooms = document.getElementById("rooms-input").value;
     predictPrice(rooms);
   });
+  //綁定鍵盤輸入 鍵盤按鍵Enter
+
+  document
+    .getElementById("rooms-input")
+    .addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        const rooms = parseFloat(this.value);
+        predictPrice(rooms);
+      }
+    });
 });
 
 async function loadRegressionData() {
@@ -27,7 +37,10 @@ async function loadRegressionData() {
     modelData = data;
 
     // 繪制圖表
-    renderChart(data);
+      renderChart(data);
+      //更新評估指標
+      updateMetrics(data.metrics);
+      console.table(data.metrics)
   } catch (error) {
     showError(error.message);
   } finally {
@@ -202,9 +215,9 @@ async function predictPrice(rooms) {
   }
 }
 function addPredictionPoint(x, y) {
-    //圖表中的資料X參數預測：參數為房間數量，會符合線性回歸模型的預測，方便使用者以圖形介面輸入房間數
+  //圖表中的資料X參數預測：參數為房間數量，會符合線性回歸模型的預測，方便使用者以圖形介面輸入房間數
   // console.log(x, y);
-//   console.table(chart.data.datasets);
+  //   console.table(chart.data.datasets);
   // 移除前一個點擊的預測點
   const existingDatasets = chart.data.datasets.filter(
     (ds) => ds.label !== "您的預測"
@@ -223,9 +236,27 @@ function addPredictionPoint(x, y) {
   chart.data.datasets = existingDatasets;
   chart.update();
 }
+function updateMetrics(metrics) {
+  //更新評估指標
+  document.getElementById("r2-score").textContent = metrics.r2_score;
+  document.getElementById("mse").textContent = metrics.mse;
+  document.getElementById("rmse").textContent = metrics.rmse;
+  document.getElementById("coefficient").textContent = metrics.coefficient;
+  //在機器學習中的「coefficient」（迴歸係數）
+  //R² 分數顏色提示
+  const r2Element = document.getElementById("r2-score");
+  const r2Value = metrics.r2_score;
+  if (r2Value > 0.7) {
+    r2Element.style.color = "#4caf50";
+  } else if (r2Value > 0.4) {
+    r2Element.style.color = "#ff9800";
+  } else {
+    r2Element.style.color = "#f44336";
+  }
+}
 
 function showLoading(show) {
-//顯示你的
+  //顯示你的
   const loading = document.getElementById("loading");
   if (show) {
     loading.classList.add("active");
