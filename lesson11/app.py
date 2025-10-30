@@ -1,40 +1,39 @@
-from flask import Flask,render_template, jsonify, Response,request
+from flask import Flask,render_template,jsonify,Response,request
+import json
 from sklearn.datasets import fetch_california_housing
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 import numpy as np
-
 app = Flask(__name__)
-
-
-# 自定義JSON序列化設定
-app.json.ensure_ascii = False
-
-
+# 讓app輸出json時,繁體中文不會出現亂碼
+# 必須放在 jsonify 之前設定
+app.config['JSON_AS_ASCII'] = False
+# 讓app輸出json時,繁體中文不會出現亂碼,支援新的flask版本
+app.config['JSON_SORT_KEYS'] = False  # 可選，防止自動排序 key
 @app.route("/")
 def index():
     return render_template("index.html")
-
-@app.route("/knn")
-def knn():
-    return render_template("knn.html")
 
 @app.route("/regression")
 def regression():
     return render_template("regression.html")
 
+@app.route("/knn")
+def knn():
+    return render_template("knn.html")
+@app.route("/machine")
+def machine():
+    return render_template("machine.html")
+
 @app.route("/test")
 def test():
     return render_template("test.html")
-
 @app.route("/test1")
 def test1():
     return render_template("test1.html")
-
 @app.route("/api/regression/data")
 def regression_data():
-    """線性迴歸 API - 使用加州房價資料集（簡化版）"""
     try:  
 
         # 載入加州房價資料集
@@ -72,7 +71,7 @@ def regression_data():
         # 生成迴歸線資料(用於繪圖)
         X_line = np.linspace(X.min(),X.max(), 100).reshape(-1,1)
         y_line = model.predict(X_line)
-
+    
         # 準備回應資料
         response = {
             "success": True,
@@ -111,8 +110,9 @@ def regression_data():
                 "info": "此資料集取自 1990 年加州人口普查資料"
             }
         }
+        # 正確輸出中文 JSON
+        return Response(json.dumps(response, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
-        return jsonify(response)
     except Exception as e:
         return jsonify(
             {
@@ -125,7 +125,7 @@ def regression_data():
 def regression_predict():
     """線性迴歸預測 API - 根據房間數預測房價"""
     try:
-    # 取得使用者輸入的房間數
+        # 取得使用者輸入的房間數
         rooms = float(request.args.get('rooms', 5))
 
         # 載入資料並訓練模型
