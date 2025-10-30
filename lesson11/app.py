@@ -164,7 +164,7 @@ def regression_predict():
     except Exception as error:
         return jsonify({
             "success": False,
-            "error": str(e)
+            "error": str(error)
         }), 500
 
 def main():
