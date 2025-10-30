@@ -181,6 +181,7 @@ function renderChart(data) {
     })
 }
 
+// 傳輸資料
 async function predictPrice(rooms){
     if (isNaN(rooms) || rooms < 1 || rooms > 15){
         alert('請輸入有效的房間數(1~15間)')

@@ -1,39 +1,40 @@
-from flask import Flask,render_template,jsonify,Response
-import json
+from flask import Flask,render_template, jsonify, Response,request
 from sklearn.datasets import fetch_california_housing
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 import numpy as np
+
 app = Flask(__name__)
-# 讓app輸出json時,繁體中文不會出現亂碼
-# 必須放在 jsonify 之前設定
-app.config['JSON_AS_ASCII'] = False
-# 讓app輸出json時,繁體中文不會出現亂碼,支援新的flask版本
-app.config['JSON_SORT_KEYS'] = False  # 可選，防止自動排序 key
+
+
+# 自定義JSON序列化設定
+app.json.ensure_ascii = False
+
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/knn")
+def knn():
+    return render_template("knn.html")
 
 @app.route("/regression")
 def regression():
     return render_template("regression.html")
 
-@app.route("/knn")
-def knn():
-    return render_template("knn.html")
-@app.route("/machine")
-def machine():
-    return render_template("machine.html")
-
 @app.route("/test")
 def test():
     return render_template("test.html")
+
 @app.route("/test1")
 def test1():
     return render_template("test1.html")
+
 @app.route("/api/regression/data")
 def regression_data():
+    """線性迴歸 API - 使用加州房價資料集（簡化版）"""
     try:  
 
         # 載入加州房價資料集
@@ -110,23 +111,62 @@ def regression_data():
                 "info": "此資料集取自 1990 年加州人口普查資料"
             }
         }
-        # 正確輸出中文 JSON
-        return Response(json.dumps(response, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
+        return jsonify(response)
     except Exception as e:
-        return jsonify({"success": False, "error": str(e)}), 500
-    
+        return jsonify(
+            {
+                "success": False,
+                "error": str(e)
+            }, 500
+        )
+
 @app.route("/api/regression/predict")
 def regression_predict():
     """線性迴歸預測 API - 根據房間數預測房價"""
-    response = {
-        "success": True,
-        "prediction":{
-            "price": 100,
-            "unit": "萬美元"
+    try:
+    # 取得使用者輸入的房間數
+        rooms = float(request.args.get('rooms', 5))
+
+        # 載入資料並訓練模型
+        housing = fetch_california_housing()
+        sample_size = 200
+        feature_idx = 2
+        X = housing.data[:sample_size,feature_idx].reshape(-1,1) #特徵
+        y = housing.target[:sample_size] * 10 # 房價(萬美金) #標籤
+
+        # 訓練模型
+        model = LinearRegression()
+        model.fit(X, y)
+
+        # 預測
+        X_input = np.array([[rooms]])
+        predicted_price = model.predict(X_input)[0]
+        print(predicted_price)
+
+        response = {
+            "success": True,
+            "input": {
+                "rooms": rooms,
+                "unit" : "間"
+            },
+            "prediction": {
+                "price": round(predicted_price, 2),
+                "unit": "萬美元"
+            },
+            "formula":{
+                "coefficient": round(model.coef_[0],2),
+                "intercept": round(model.intercept_, 2),
+                "equation": f"房價={round(model.coef_[0],2)} x 房間數 + {round(model.intercept_, 2)}"
+            }
         }
-    }
-    return jsonify(response)
+        return jsonify(response)
+    except Exception as error:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        }), 500
+
 def main():
     """啟動應用（教學用：啟用 debug 模式）"""
     # 在開發環境下使用 debug=True，部署時請關閉
