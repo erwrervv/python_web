@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Python機器學習課程{% endblock %}</title>
+    {# 使用 Flask 靜態資源 url_for 連結到 /static/css/styles.css #}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    {% endblock %}
     <!-- 已移除內嵌 <style>，相關導覽列樣式已移至 static/css/index.css -->
+    {% endblock %}
 </head>
 <body>
     <!-- 導覽列 -->
     <nav class="navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">職能發展學院</a>
+            <a class="navbar-brand" href="#">職能發展學院</a>
             <ul class="nav-list">
                 <li class="nav-item">
-                    <a href="{{ url_for('machine') }}" {% if request.endpoint == 'machine' %}class="active"{% endif %}>機器學習</a>
+                    <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>機器學習</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url_for('regression.regression_index') }}" {% if request.endpoint == 'regression_index' %}class="active"{% endif %}>線性迴歸</a>
@@ -37,7 +38,11 @@
     </nav>
 
     <!-- 主要內容區 -->
-    <main class="container">{% block content %}{% endblock %}</main>
+     <main class="container">
+     {% block content %}
+    
+    {% endblock %}
+     </main>
 
     <!-- 頁尾 -->
     <footer>
@@ -48,6 +53,7 @@
 
     <!-- 載入手機版導覽的行為腳本 -->
     <script src="{{ url_for('static', filename='js/base.js') }}"></script>
-        {% block javascript %}{% endblock %}
+    {% block code %}
+    {% endblock %}
 </body>
 </html>

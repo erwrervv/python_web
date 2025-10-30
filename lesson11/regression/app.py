@@ -1,11 +1,9 @@
-from flask import Blueprint,render_template,render_template,jsonify,Response,request
-import json
+from flask import Blueprint,render_template,request,jsonify
 from sklearn.datasets import fetch_california_housing
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score, mean_squared_error
 import numpy as np
-
 
 regression_bp = Blueprint(
     'regression',
@@ -22,8 +20,11 @@ def regression_index():
 @regression_bp.route("/api/data")
 def regression_data():
     """線性迴歸 API - 使用加州房價資料集（簡化版）"""
-    try:
+    try:  
+
+        # 載入加州房價資料集
         housing = fetch_california_housing()
+
         # 只使用前200筆資料作為展示
         sample_size = 200
         X_full = housing.data[:sample_size]
@@ -56,7 +57,7 @@ def regression_data():
         # 生成迴歸線資料(用於繪圖)
         X_line = np.linspace(X.min(),X.max(), 100).reshape(-1,1)
         y_line = model.predict(X_line)
-    
+
         # 準備回應資料
         response = {
             "success": True,
@@ -95,9 +96,8 @@ def regression_data():
                 "info": "此資料集取自 1990 年加州人口普查資料"
             }
         }
-        # 正確輸出中文 JSON
-        return Response(json.dumps(response, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
+        return jsonify(response)
     except Exception as e:
         return jsonify(
             {
@@ -106,11 +106,11 @@ def regression_data():
             }, 500
         )
 
-@app.route("/api/regression/predict")
+@regression_bp.route("/api/predict")
 def regression_predict():
     """線性迴歸預測 API - 根據房間數預測房價"""
     try:
-        # 取得使用者輸入的房間數
+    # 取得使用者輸入的房間數
         rooms = float(request.args.get('rooms', 5))
 
         # 載入資料並訓練模型
