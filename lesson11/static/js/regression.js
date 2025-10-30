@@ -23,30 +23,35 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function loadRegressionData() {
-  showLoading(true);
-  try {
-    const response = await fetch("/api/regression/data");
-    if (!response.ok) {
-      throw new Error(`網路出現問題:${response.statusText}`);
-    }
-    const data = await response.json();
+    showLoading(true);
+    try {
+        const response = await fetch('/api/regression/data')
+        if (!response.ok) {
+            throw new Error(`網路出現問題:${response.statusText}`)
+        }
+        const data = await response.json()
 
-    if (!data.success) {
-      throw new Error(`解析josn失敗`);
-    }
-    modelData = data;
+        if (!data.success) {
+            throw new Error(`解析josn失敗`);
+        }
+        modelData = data
 
-    // 繪制圖表
-      renderChart(data);
-      //更新評估指標
-      updateMetrics(data.metrics);
-      console.table(data.metrics)
-  } catch (error) {
-    showError(error.message);
-  } finally {
-    showLoading(false);
-  }
-}
+        // 繪制圖表
+        renderChart(data)
+
+        // 更新評估指標
+        updateMetrics(data.metrics)
+
+        // 更新模型資訊
+        updateModelInfo(data.description)
+
+    } catch (error) {
+        showError(error.message);
+    } finally {
+        showLoading(false);
+    }
+
+};
 
 function renderChart(data) {
   const ctx = document.getElementById("regressionChart").getContext("2d");
@@ -254,7 +259,14 @@ function updateMetrics(metrics) {
     r2Element.style.color = "#f44336";
   }
 }
-
+function updateModelInfo(description) {
+  console.table(description);
+  document.getElementById("dataset-name").textContent = description.dataset;
+  document.getElementById("total-samples").textContent = description.samples;
+  document.getElementById("train-size").textContent = description.train_size;
+  document.getElementById("test-size").textContent = description.test_size;
+  document.getElementById("target-name").textContent = description.target_name;
+}
 function showLoading(show) {
   //顯示你的
   const loading = document.getElementById("loading");
